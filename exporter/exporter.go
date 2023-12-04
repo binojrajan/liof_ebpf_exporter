@@ -517,7 +517,7 @@ func validateMaps(module *libbpfgo.Module, cfg config.Config) error {
 		}
 
 		valueSize := m.ValueSize()
-		if valueSize != 8 {
+		if valueSize == 0 {
 			return fmt.Errorf("value size for map %q is not expected 8 bytes (u64), it is %d bytes", name, valueSize)
 		}
 	}

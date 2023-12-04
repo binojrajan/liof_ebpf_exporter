@@ -1,0 +1,38 @@
+metrics:
+  counters:
+    - name: fsslower_events
+      help: Trace file system operations slower than a threshold.
+      perf_event_array: true
+      labels:
+        - name: delta_us
+          size: 8
+          decoders:
+            - name: uint
+        - name: end_ns
+          size: 8
+          decoders:
+            - name: uint
+        - name: offset
+          size: 8
+          decoders:
+            - name: uint
+        - name: size
+          size: 4
+          decoders:
+            - name: uint
+        - name: pid
+          size: 4
+          decoders:
+            - name: uint
+        - name: fs_file_op
+          size: 8
+          decoders:
+            - name: uint
+        - name: file
+          size: 32
+          decoders:
+            - name: string
+        - name: task
+          size: 16
+          decoders:
+            - name: string
