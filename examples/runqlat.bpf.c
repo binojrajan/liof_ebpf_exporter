@@ -184,7 +184,7 @@ cleanup:
 	return 0;
 }
 
-SEC("tp_btf/sched_wakeup")
+// SEC("tp_btf/sched_wakeup")
 int BPF_PROG(sched_wakeup, struct task_struct *p)
 {
 	if (filter_cg && !bpf_current_task_under_cgroup(&cgroup_map, 0))
@@ -193,7 +193,7 @@ int BPF_PROG(sched_wakeup, struct task_struct *p)
 	return trace_enqueue(p->tgid, p->pid);
 }
 
-SEC("tp_btf/sched_wakeup_new")
+// SEC("tp_btf/sched_wakeup_new")
 int BPF_PROG(sched_wakeup_new, struct task_struct *p)
 {
 	if (filter_cg && !bpf_current_task_under_cgroup(&cgroup_map, 0))
@@ -202,7 +202,7 @@ int BPF_PROG(sched_wakeup_new, struct task_struct *p)
 	return trace_enqueue(p->tgid, p->pid);
 }
 
-SEC("tp_btf/sched_switch")
+// SEC("tp_btf/sched_switch")
 int BPF_PROG(sched_switch, bool preempt, struct task_struct *prev, struct task_struct *next)
 {
 	return handle_switch(preempt, prev, next);

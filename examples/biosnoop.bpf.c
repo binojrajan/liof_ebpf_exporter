@@ -135,7 +135,7 @@ int trace_rq_start(struct request *rq, bool insert)
 	return 0;
 }
 
-SEC("tp_btf/block_rq_insert")
+SEC("raw_tp/block_rq_insert")
 int BPF_PROG(block_rq_insert)
 {
 	if (filter_cg && !bpf_current_task_under_cgroup(&cgroup_map, 0))
@@ -152,7 +152,7 @@ int BPF_PROG(block_rq_insert)
 		return trace_rq_start((void *)ctx[1], true);
 }
 
-SEC("tp_btf/block_rq_issue")
+SEC("raw_tp/block_rq_issue")
 int BPF_PROG(block_rq_issue)
 {
 	if (filter_cg && !bpf_current_task_under_cgroup(&cgroup_map, 0))
@@ -169,7 +169,7 @@ int BPF_PROG(block_rq_issue)
 		return trace_rq_start((void *)ctx[1], false);
 }
 
-SEC("tp_btf/block_rq_complete")
+SEC("raw_tp/block_rq_complete")
 int BPF_PROG(block_rq_complete, struct request *rq, int error,
 	     unsigned int nr_bytes)
 {
